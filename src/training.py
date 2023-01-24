@@ -1,6 +1,8 @@
 from src.utils.common import read_config
 from src.utils.data_mgmt import get_data
-from src.utils.model import create_model, save_model
+from src.utils.model import create_model, save_model, save_plots
+import pandas as pd
+import matplotlib.pyplot as plt
 import os
 
 import argparse
@@ -40,6 +42,20 @@ def training(config_path):
     model_name=config["artifacts"]["model_name"]
 
     save_model(model, model_name, model_dir_path)
+
+    # Saving Plots
+
+    pd.DataFrame(history.history).plot()
+    plt.grid(True)
+
+    plot_dir = config["artifacts"]["plots_dir"]
+
+    plot_dir_path = os.path.join(artifacts_dir, plot_dir)
+    os.makedirs(plot_dir_path, exist_ok=True)
+
+    plot_name = config["artifacts"]["plot_name"]
+
+    save_plots(plot_name, plot_dir_path)
 
 
 if __name__=='__main__':
