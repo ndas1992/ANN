@@ -1,0 +1,10 @@
+tensorflow
+matplotlib
+seaborn
+numpy
+pandas
+PyYAML
+
+
+## local Package Installation
+-e.
